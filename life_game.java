@@ -1,5 +1,3 @@
-package proyectos;
-
 public class life_game {
 
 	public static void main(String[] args) {
