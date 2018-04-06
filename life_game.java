@@ -1,5 +1,3 @@
-package proyectos;
-
 public class life_game {
 
 	public static void main(String[] args) {
@@ -29,5 +27,17 @@ public class life_game {
 			}
 		}
 	}
-
+	public static int cleanA() {
+		int tablaA[][] = new int[12][12];
+		int next = 0;
+		int i;
+		int j;
+		
+		for (i = 0; i < next) {
+			
+			for (j = 0; j < next) {
+				tablaA[i][j] = 0;
+			}
+		}
+	}
  }
