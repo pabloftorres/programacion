@@ -43,4 +43,18 @@ public class life_game {
 		}
 		return tablaA[i][j];
 	}
+	public static int cleanB() {
+		int tablaB[][] = new int[12][12];
+		int next = 0;
+		int i = 0;
+		int j = 0;
+
+		for (i = 0; i < next;) {
+			
+			for (j = 0; j < next;) {
+				tablaB[i][j] = 0;
+			}
+		}
+		return tablaB[i][j];
+	}
  }
