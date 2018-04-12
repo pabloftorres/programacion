@@ -1,32 +1,44 @@
-
 package proyectos;
-
-import java.util.Scanner;
 
 public class life_game {
 
+	private static int size= 12;
 	public static void main(String[] args) {
 		cLector lector = new cLector();
 
-		int tableA[][] = new int[12][12];
-		int tableB[][] = new int[12][12];
+		int tableA[][] = new int[size][size];
+		int tableB[][] = new int[size][size];
 		int fila = 0, columna = 0;
-		int next = 0;
+
 		
-		tablero();
+		clean(tableA);
+		clean(tableB);
+
 		fila = CoordenadaA();
 		columna = CoordenadaB();
 
 		while (fila != -1 && columna != -1) {
+			tableA[fila][columna] = 1;
 
-			tableA[fila][columna] = fila;
-			tableA[fila][columna] = columna;
-			System.out.println("1");
-			next++;
+			fila = CoordenadaA();
+			columna = CoordenadaB();
+			
 		}
-		clean(tableA);
-		clean(tableB);
-	}		
+		
+	mostrarGen(tableA);
+	
+	}	
+	public static void mostrarGen(int table[][]) {
+		int i;
+		int j;
+		for (i = 1; i < 10; i++) {
+			
+			for (j = 1; j < 10; j++) {
+				System.out.print("| " + table[i][j] + " |");
+			}
+			System.out.println(" ");
+		}
+ 	}
 	public static int CoordenadaA() {
 		cLector lector = new cLector();
 
@@ -47,18 +59,13 @@ public class life_game {
 
 		return vColumna;
 	}
-	public static void tablero() {
-		int raya;
-		for (raya = 0; raya < 10; raya++) {
-			System.out.println("|__|__|__|__|__|__|__|__|__|__|");
-		}
-	}
 	public static void clean(int table[][]) {
 		int i, j;
 
-		for (i = 1; i < 12; i++) {
-			for (j = 1; j < 12; j++) {
+		for (i = 1; i < 10; i++) {
+			for (j = 1; j < 10; j++) {
 				table[i][j] = 0;
 			}
 		}
 	}
+}
