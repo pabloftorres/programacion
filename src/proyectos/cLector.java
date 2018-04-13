@@ -25,7 +25,7 @@ public class cLector {
 		
 		while (!lector.hasNextInt()){
 				lector.next();
-				System.out.print("No és un enter. Introdueix un altre numero: ");
+				System.out.print("No es un enter. Introdueix un altre numero: ");
 		}
 		correcte=lector.nextInt();
 		lector.nextLine();
