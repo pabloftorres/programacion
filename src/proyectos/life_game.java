@@ -7,7 +7,6 @@ public class life_game {
 		cLector lector = new cLector();
 
 		int tableA[][] = new int[size][size];
-		//int tableB[][] = new int[size][size];
 		int fila = 0, columna = 0;
 
 		fila = Coordenada("Insereix 1ra coordenada: ");
@@ -73,7 +72,7 @@ public class life_game {
 					if (vivesTauler > 3) {
 						tableB[f][c] = 0;
 					}
-					else if (tableA[f][c] == 0 && vivesTauler > 3) {
+					if (tableA[f][c] == 0 && vivesTauler > 3) {
 						tableB[f][c] = 1;
 					}
 				}
