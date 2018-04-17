@@ -13,7 +13,7 @@ public class hundir_la_flota {
 		
 		
 		System.out.println("Player1 et toca");
-		
+	
 		while (barcos < 5) {
 			fila = Coordenada("Introdueix una coordenada:");
 			columna = Coordenada("Introdueix una coordenada:");
@@ -65,5 +65,26 @@ public class hundir_la_flota {
 			columna = Coordenada("Introdueix una coordenada:");
 		}
 		return lector.llegirEnter();
+	}
+	public static void regles(int tableA[][],int tableB[][]) {
+		String tocatM = null;
+		int aigua;
+		int voltant;
+		
+		for (int f = 1; f <= 10; f++) {
+
+			for (int c = 1; c <= 10; c++) {
+				if (tableA [f][c] == 1) {
+					voltant = tableA[f-1][c] + tableA[f+1][c] + tableA[f][c+1] + tableA[f][c-1] + tableA[f-1][c-1] 
+							+ tableA[f-1][c+1] + tableA[f+1][c+1] + tableA[f+1][c+1];
+				}
+				if(tableA[f][c] == 0) {
+					System.out.println("Aigua!!");
+				}
+				if(tableA[f][c] == Coordenada(tocatM)) {
+					System.out.println("Tocat i enfonsat!!");
+				}
+			}
+		}
 	}
 }
