@@ -75,15 +75,21 @@ public class hundir_la_flota {
 		
 		return voltant;
 }
-	public static int atac(int table []) {
-		cLector lector = new cLector();
+	public static void atac1vs2(int table []) {
 		int fila = 0;
 		int columna = 0;
 		
-		System.out.println("Comença la fase d'atac. Introdueix 2 coordenades per atacar. Primerament una i després l'altre.");
+		System.out.println("Jugador1 et toca atacar. Introdueix 2 coordenades per atacar. Primerament una i despres l'altre.");
 		fila = Coordenada("Introdueix una coordenada:");
 		columna = Coordenada("Introdueix una coordenada:");
-		
-		return lector.llegirEnter();	
+			
 		}
+	public static  void atac2vs1(int table []) {
+		int fila = 0;
+		int columna = 0;
+		
+		System.out.println("Jugador 2 et toca atacar. Introdueix 2 coordenades per atacar. Primerament una i despres l'altre.");
+		fila = Coordenada("Introdueix una coordenada:");
+		columna = Coordenada("Introdueix una coordenada:");
+	}
 }
