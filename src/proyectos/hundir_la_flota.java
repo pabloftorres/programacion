@@ -13,7 +13,7 @@ public class hundir_la_flota {
 		int tableA[][] = new int[size][size];
 		int tableB[][] = new int[size][size];
 
-
+		
 		System.out.println("Player1 introdueix coordenades per ficar vaixells.");
 
 		while (barcos < 5) {
@@ -218,3 +218,4 @@ public class hundir_la_flota {
 		}
 
 	}
+}
