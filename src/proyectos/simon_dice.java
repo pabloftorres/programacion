@@ -12,7 +12,6 @@ public class simon_dice {
 		int choice;
 		int next;
 		int random;
-		int i;
 		int index;
 		int numero = 1;
 		int color = 0;
@@ -33,6 +32,9 @@ public class simon_dice {
 			System.out.println("[1]: Nivell basic \n[2]: Nivell intermig \n[3]: Nivell pro");
 			System.out.print("Que escolleixes: ");
 			choice = nivel();
+			
+			cleanTables(tableA);
+			cleanTables(tableB);
 
 			if (choice == 1) {
 				System.out.println("Has escollit jugar al Nivell basic");
@@ -44,7 +46,7 @@ public class simon_dice {
 				System.out.println("Els numeros apareixeran durant 5 segons");
 				taula(tableA);
 				wait.wait(5);
-				limpiar = clean();
+				limpiar = cleanScreen();
 
 				numero = 1;
 
@@ -66,9 +68,18 @@ public class simon_dice {
 							System.out.println("Points: " + point);
 						}
 					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
 				}
 				wait.wait(3);
-				limpiar = clean();
+				limpiar = cleanScreen();
 
 				System.out.println("Final Points: " + point);
 				System.out.print("Vols jugar una altre vegada: ");
@@ -84,7 +95,7 @@ public class simon_dice {
 				System.out.println("Els numeros apareixeran durant 5 segons");
 				taula(tableA);
 				wait.wait(3);
-				limpiar = clean();
+				limpiar = cleanScreen();
 
 				numero = 1;
 
@@ -106,9 +117,18 @@ public class simon_dice {
 							System.out.println("Points: " + point);
 						}
 					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
 				}
 				wait.wait(3);
-				limpiar = clean();
+				limpiar = cleanScreen();
 
 				System.out.println("Final Points: " + point);
 				System.out.print("Vols jugar una altre vegada: ");
@@ -124,7 +144,7 @@ public class simon_dice {
 				System.out.println("Els numeros apareixeran durant 5 segons");
 				taula(tableA);
 				wait.wait(1);
-				limpiar = clean();
+				limpiar = cleanScreen();
 
 				numero = 1;
 
@@ -146,10 +166,19 @@ public class simon_dice {
 							System.out.println("Points: " + point);
 						}
 					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
 				}
 				wait.wait(3);
-				limpiar = clean();
-
+				limpiar = cleanScreen();
+				
 				System.out.println("Final Points: " + point);
 				System.out.print("Vols jugar una altre vegada: ");
 				go = lector.llegirBool();
@@ -182,7 +211,7 @@ public class simon_dice {
 		}
 	}
 
-	public static String clean() {
+	public static String cleanScreen() {
 		cLector lector = new cLector();
 
 		String limpiar = " ";
@@ -192,5 +221,13 @@ public class simon_dice {
 			System.out.println(limpiar);
 		}
 		return limpiar;
+	}
+	
+	public static void cleanTables(int table[]) {
+		int i;
+		
+		for (i = 0; i < 4; i++) {
+			table[i] = 0;
+		}
 	}
 }
