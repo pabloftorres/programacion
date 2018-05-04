@@ -42,7 +42,6 @@ public class cLector {
 	// Llegim un string, sobreCarrega primera
 	public String llegirString (){
 		String frase = "";
-		Scanner lector = new Scanner(System.in);
 
 		frase=lector.nextLine();
 		return frase;
@@ -87,6 +86,13 @@ public class cLector {
 		correcte = lector.nextBoolean();
 		lector.nextLine();
 
+		return correcte;
+	}
+	
+	public char llegirChar() {
+		char correcte;
+		
+		correcte = lector.next().charAt(0);
 		return correcte;
 	}
 }
