@@ -35,4 +35,12 @@ package Activitats_metodes;
 			color = lector.llegirChar();		
 			return color;
 		}
+		public static void cleanTables(int table[]) {
+			int i;
+			
+			for (i = 0; i < size; i++) {
+				table[i] = 0;
+			}
+		}
+		
 }
