@@ -1,62 +1,70 @@
-package Activitats_metodes;
+package proyectos;
 
-	public class mastermind {
+public class mastermind {
 
-		private static int size = 4;
+	private static int size = 8;
 
-		public static void main(String[] args) {
-			
-			cLector lector = new cLector();
-			cWait wait = new cWait();
-			
-			
-			int number;
-			int tableA[] = new int[size];
-			int tableB[] = new int[size];
-			
-			System.out.println("-Ara jugarem al joc Mastermind-");
-			System.out.println("-Podras triar entre aquests colors. Blau(B), Negre(N), Vermell(V), Lila(L), Groc(G) i el color Crema(C)-");
-			Player1();
-		}
-		public static void Player1() {
-			cLector lector = new cLector();
-			char color;
-			int bolsa = 0;
-				
-				while (bolsa < 4) {
-				System.out.println("Player1, ara es el teu torn.");
-				System.out.println("Escull 4 colors dels anteriors, agefint la lletra esmentada per cada color. Es poden repetir :");
-				color = lector.llegirChar();
-				
-				if ((color =='B')||(color =='N')||(color =='V')||(color =='L')||(color =='G')||(color =='C')) {
-					bolsa++;
-				}
-				else {
-					System.out.println("Introdueix una lletra correcte.");
+	public static void main(String[] args) {
 
-				}
-			}
-		}
-		public static void Player2() {
-			cLector lector = new cLector();
-			char color;
-			int bolsa = 0;
-			
-				while(bolsa < 4) {
-					System.out.println("Player2, ara es el teu torn.");
-					System.out.println("Haurás d'esbrinar la serie de colors del Player1.");
-					System.out.println("-Podras triar entre aquests colors. Blau(B), Negre(N), Vermell(V), Lila(L), Groc(G) i el color Crema(C)-");
-					System.out.println("Escull 4 colors dels anteriors, agefint la lletra esmentada per cada color. Recorda poden repetir :");
-					
-					color = lector.llegirChar();
-				}
-		}
-		public static void cleanTables(int table[]) {
-			int i;
-			
-			for (i = 0; i < size; i++) {
-				table[i] = 0;
-			}
-		}
+		int number;
+		char tableA[] = new char[size];
+		char tableB[] = new char[size];
+		int contador = 0;;
 		
+		System.out.println("Ara jugarem al joc Mastermind");
+		System.out.println("Hi ha 6 colors. Blau(B), negre(N), vermell(V), lila(L), groc(G) i el color crema(C)");
+		while (contador < 4) {
+
+			System.out.println("Player1, ara es el teu torn.");
+			System.out.println("Escolleix quatre colors:");
+			
+			for (number = 0; number < 4; number++) {
+				tableA[number] = choice();
+				contador++;				
+			}		
+			tablero(tableA);
+		}
+		cleanScreen();	
+	}
+
+	public static char choice() {
+		cLector lector = new cLector();
+
+		char color;
+
+		color = lector.llegirChar();		
+		return color;
+	}	
+
+	public static void tablero(char table[]) {
+		int square;
+
+		for (square = 0; square < 4; square++) {
+			System.out.print("[" + table[square] +  "]");
+		}
+	}
+	
+	public static String cleanScreen() {
+		cWait wait = new cWait();
+		cLector lector = new cLector();
+		
+		String clean = " ";
+		int i;
+		
+		wait.wait(3);
+		
+		for (i = 0; i <= 10; i++) {
+			System.out.println(clean);
+		}
+		return clean;
+	}
+	
+	public static void cleanTables (int table[]) {
+		
+		int next;
+		
+		for (next = 0; next < 4; next++) {
+			table[next] = 0;
+		}
+	}
 }
