@@ -1,4 +1,4 @@
-package proyectos;
+package Activitats_metodes;
 
 public class mastermind {
 
@@ -24,7 +24,14 @@ public class mastermind {
 			}		
 			tablero(tableA);
 		}
-		cleanScreen();	
+		cleanScreen();
+		System.out.println("Player2, ara es el teu torn.");
+		System.out.println("Endevina els colors del Player1, escollint quatre colors dels anterior:");
+		for (number = 0; number < 4; number++) {
+			tableB[number] = choice();
+			contador++;
+		}
+		tablero(tableB);
 	}
 
 	public static char choice() {
@@ -51,7 +58,7 @@ public class mastermind {
 		String clean = " ";
 		int i;
 		
-		wait.wait(3);
+		wait.wait(2);
 		
 		for (i = 0; i <= 10; i++) {
 			System.out.println(clean);
