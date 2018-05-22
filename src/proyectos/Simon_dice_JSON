@@ -24,7 +24,7 @@ public class Simon_diu {
 	ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
     
-    private ArrayList<Simon_diu> scores;
+
     
 	private final static String ARXIU = "tasks.json";
 	private final static String NEXT_PK = "NEXT-PK";
@@ -40,16 +40,13 @@ public class Simon_diu {
 	private static int size2 = 5;
 	private JSONObject json = new JSONObject();
 	
-	public ArrayList<Simon_diu> getScores() {
-        loadScoreFile();
-        sort();
-        return scores;
-    }
-	
 	public static void main(String[] args) {
 		
 		Simon_diu programa = new Simon_diu();
 		programa.inici();
+		
+		ArrayList<Simon_diu> score = new ArrayList<Simon_diu>();
+		score.add(game(points));
 	}
 	private void inici()  {
 		int op;
@@ -68,6 +65,10 @@ public class Simon_diu {
 		}
 		
 		System.out.println("ADEU!!!!");
+	}
+	private void mostrarScore() {
+		
+		
 	}
 	private int mostrarMenu() {
 		cLector lector = new cLector();
@@ -88,7 +89,7 @@ public class Simon_diu {
 		
 		return op;
 	}
-	private int game() {
+	private static int game() {
 		cLector lector = new cLector();
 		int op;
 		
