@@ -1,0 +1,395 @@
+package Json;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
+import Activitats_metodes.cLector;
+import Activitats_metodes.cWait;
+
+public class Simon_diu {
+	
+	private static final String HIGHSCORE_FILE = "scores.dat";
+	ObjectOutputStream outputStream = null;
+    ObjectInputStream inputStream = null;
+    
+    private ArrayList<Simon_diu> scores;
+    
+	private final static String ARXIU = "tasks.json";
+	private final static String NEXT_PK = "NEXT-PK";
+	private final static String ID = "ID";
+	private final static String DESCRIPCIO = "DESCRIPTION";
+	private final static String HORES = "HOURS";
+	private final static String PRIORITAT = "PRIORITY";
+	private final static String DIA = "DAY";
+	
+	private final static String TASQUES_PENDENTS = "PENDING-TASKS";
+	private final static String TASQUES_REALITZADES = "DONE-TASKS";
+	private static int size = 4;
+	private static int size2 = 5;
+	private JSONObject json = new JSONObject();
+	
+	public ArrayList<Simon_diu> getScores() {
+        loadScoreFile();
+        sort();
+        return scores;
+    }
+	
+	public static void main(String[] args) {
+		
+		Simon_diu programa = new Simon_diu();
+		programa.inici();
+	}
+	private void inici()  {
+		int op;
+		
+		loadJson();
+		System.out.println(json.toString());
+		op = mostrarMenu();
+		while (op != 0) {
+			switch (op) {
+				case 1: mostrarScore(); break;
+				case 2: jugarPartida();break;
+				case 3: reiniciarScore(); break;
+			}
+			
+			op = mostrarMenu();
+		}
+		
+		System.out.println("ADEU!!!!");
+	}
+	private int mostrarMenu() {
+		cLector lector = new cLector();
+		int op;
+		
+		System.out.println("► OPCIONS DEL PROGRAMA ◄");
+		System.out.println("====================");
+		System.out.println("• 1. TOP5 SCORE •");
+		System.out.println("• 2. JUGAR PARTIDA •");
+		System.out.println("• 3. REINICIAR TOP5 SCORE. •");
+		System.out.println("• 0. Sortir •");
+		System.out.println("");
+		
+		op = lector.llegirEnter("Quina opcio vols realitzar: ");
+		while ((op < 0) || (op > 4)) {
+			op = lector.llegirEnter("Quina opcio³ vols realitzar: ");
+		}
+		
+		return op;
+	}
+	private int game() {
+		cLector lector = new cLector();
+		int op;
+		
+		op = mostrarMenu();
+		
+		if (op == 1) {
+			System.out.println("Has escollit mostrar TOP 5");
+			basic(tableA);
+			System.out.println("Els numeros apareixeran durant 5 segons");
+			taula(tableA);
+			wait.wait(5);
+			cleanScreen();
+
+			numero = 1;
+
+			numPantalla(tableB);
+			points = 0;
+	}	
+	private void loadJson()  {
+		// TODO Auto-generated method stub
+		try {
+			File fitxer = new File(ARXIU);
+			
+			// Preguntem si el fitxer existeix en el disc
+			// la primera vegada no existirÃ 
+			if (fitxer.exists()) {
+				FileReader fr = new FileReader(ARXIU);
+				BufferedReader br = new BufferedReader(fr);
+				
+				String s = "";
+				String jsonString = "";
+				
+				// Llegim totes les lÃ­nies del fitxer
+				while((s = br.readLine()) != null) {
+					jsonString = jsonString + s;
+				}
+				
+				fr.close();
+				
+				json = new JSONObject(jsonString);  // serialitzem
+			} 
+			else {
+				// Si l'arxiu no existeix construÃ¯m 
+				// el json per primera vegada
+				json = new JSONObject();  // es crea sense serialitzar
+				json.put(NEXT_PK, 1);
+				
+				JSONArray ja = new JSONArray();
+				json.put(TASQUES_PENDENTS, ja);
+				json.put(TASQUES_REALITZADES, ja);
+				
+				saveJson();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	private void saveJson() {
+		// Guardem el json serialitzat
+		try {
+			
+			FileWriter file = new FileWriter(ARXIU);
+			file.write(json.toString());
+			file.flush();
+			file.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	private void mostrarScore() {
+		int point = 0;
+		int tableA[] = new int[size2];
+		
+	}
+		cLector lector = new cLector();
+		cWait wait = new cWait();
+
+		int choice;
+		int next;
+		int math;
+		int index;
+		int numero = 1;
+		int number = 0;
+		int j;
+		int points = 0;
+		int point = 0;
+		boolean go = true;
+
+		int tableA[] = new int[size];
+		int tableB[] = new int[size];
+
+		System.out.println("Ara jugarem al joc de 'Simon dice'. Escolleix el mode de dificultat en que vols jugar");
+		point = 0;
+
+		while (go == true) {
+
+			System.out.println("[1]: Nivell basic \n[2]: Nivell intermig \n[3]: Nivell pro");
+			System.out.print("Que escolleixes: ");
+			choice = nivel();
+			
+			cleanTables(tableA);
+			cleanTables(tableB);
+
+			if (choice == 1) {
+				System.out.println("Has escollit jugar al Nivell basic");
+				basic(tableA);
+				System.out.println("Els numeros apareixeran durant 5 segons");
+				taula(tableA);
+				wait.wait(5);
+				cleanScreen();
+
+				numero = 1;
+
+				numPantalla(tableB);
+				points = 0;
+				
+				for (j = 0; j < 4; j++) {
+					if (tableA[j] == tableB[j]) {
+						points++;
+
+						if (points == 4) {
+							point++;
+							System.out.println("Points: " + point);
+						}
+					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
+				}
+				wait.wait(3);
+				cleanScreen();
+			} 
+			else if (choice == 2) {
+				System.out.print("Has escollit jugar al Nivell intermig");
+				basic(tableA);
+				System.out.println("Els numeros apareixeran durant 3 segons");
+				taula(tableA);
+				wait.wait(3);
+				cleanScreen();
+
+				numero = 1;
+
+				numPantalla(tableB);
+				points = 0;
+				
+				for (j = 0; j < 4; j++) {
+					if (tableA[j] == tableB[j]) {
+						points++;
+
+						if (points == 4) {
+							point++;
+							System.out.println("Points: " + point);
+						}
+					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
+				}
+				wait.wait(3);
+				cleanScreen();
+			} 
+			else if (choice == 3) {
+				System.out.print("Has escollit jugar al Nivell pro");
+				basic(tableA);
+				System.out.println("Els numeros apareixeran durant 1 segon");
+				taula(tableA);
+				wait.wait(1);
+				cleanScreen();
+
+				numero = 1;
+
+				numPantalla(tableB);
+				points = 0;
+				
+				for (j = 0; j < 4; j++) {
+					if (tableA[j] == tableB[j]) {
+						points++;
+
+						if (points == 4) {
+							point++;
+							System.out.println("Points: " + point);
+						}
+					}
+					else {
+						numero = 1;
+						System.out.println("Has fallat, la combinacio correcta era:");
+						
+						for (j = 0; j < 4; j++) {
+							System.out.println("[" + numero + "]: " + tableA[j]);
+							numero++;
+						}
+					}
+				}
+				wait.wait(3);
+				cleanScreen();
+			}
+			System.out.print("Vols jugar una altre vegada? Introdueix true (si) o false (no) per continuar: ");
+			go = lector.llegirBool();
+			
+			if (go == false) {
+				System.out.println("Final Points: " + point);
+			}
+		}		
+	}
+	public static int nivel() {
+		cLector lector = new cLector();
+
+		int number = 0;
+
+		number = lector.llegirEnter();
+
+		while (number > 3 || number < 1) {
+			System.out.print("Numero introduit incorrecte, escolleix un altre: ");
+			number = lector.llegirEnter();
+		}
+		return number;
+	}
+	public static void numPantalla(int tableB[]) {
+		cLector lector = new cLector();
+		
+		int index = 0;
+		int numero = 0;
+		int number;
+		
+		System.out.println("Ara, has d'escriure els numeros que han sortit per la pantalla");
+		
+		for (index = 0; index < 4; index++) {
+			System.out.print("[" + numero + "]: ");
+			number = lector.llegirEnter();
+			tableB[index] = number;
+			numero++;
+		}
+	}
+	public static void basic(int tableA[]) {
+		int next = 0;
+		int math;
+		
+
+		for (next = 0; next < 4; next++) {
+			math = random();
+			tableA[next] = math;
+		}
+	}
+
+	public static void taula(int table[]) {
+		int next;
+		int number = 1;
+
+		for (next = 0; next < size; next++) {
+			System.out.println("[" + number + "]: " + table[next]);
+			number++;
+		}
+	}
+	
+	public static int random() {
+		int number;	
+		
+		number = (int) (Math.random() * size + 1);
+		return number;
+	}
+
+	public static String cleanScreen() {
+
+		String clean = " ";
+		int i;
+
+		for (i = 1; i <= 10; i++) {
+			System.out.println(clean);
+		}
+		return clean;
+	}
+	
+	public static void cleanTables(int table[]) {
+		int i;
+		
+		for (i = 0; i < size; i++) {
+			table[i] = 0;
+		}
+	}
+}
