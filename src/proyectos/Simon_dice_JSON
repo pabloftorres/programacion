@@ -101,11 +101,8 @@ public class Simon_diu {
 		
 		if (menu == 1) {
 			System.out.println("Has escollit mostrar TOP 5");
-			
+			mostrarScore();
 	}
-		else if(menu == 2) {
-			System.out.println("Anem a jugar una partida.");
-		}
 	}
 	private void game() {
 		
