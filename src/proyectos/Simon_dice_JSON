@@ -28,14 +28,6 @@ public class Simon_diu {
     
 	private final static String ARXIU = "tasks.json";
 	private final static String NEXT_PK = "NEXT-PK";
-	private final static String ID = "ID";
-	private final static String DESCRIPCIO = "DESCRIPTION";
-	private final static String HORES = "HOURS";
-	private final static String PRIORITAT = "PRIORITY";
-	private final static String DIA = "DAY";
-	
-	private final static String TASQUES_PENDENTS = "PENDING-TASKS";
-	private final static String TASQUES_REALITZADES = "DONE-TASKS";
 	private static int size = 4;
 	private static int size2 = 5;
 	private JSONObject json = new JSONObject();
@@ -49,15 +41,15 @@ public class Simon_diu {
 		score.add(game(points));
 	}
 	private void inici()  {
-		int op;
+		int menu;
 		
 		loadJson();
 		System.out.println(json.toString());
 		op = mostrarMenu();
-		while (op != 0) {
-			switch (op) {
+		while (menu != 0) {
+			switch (menu) {
 				case 1: mostrarScore(); break;
-				case 2: jugarPartida();break;
+				case 2: game();break;
 				case 3: reiniciarScore(); break;
 			}
 			
@@ -66,13 +58,25 @@ public class Simon_diu {
 		
 		System.out.println("ADEU!!!!");
 	}
-	private void mostrarScore() {
+	private static void reiniciarScore() {
+		int Score[] = new int [size2];
+		cleanTables(Score);
+	}
+	private static int mostrarScore() {
+		int points = 0;
 		
+		JSONArray scoresArray = new JSONArray();
+		int Score[] = new int [size2];
+	
+		for(int i = 0; i < scoresArray.length(); i++){
+			points++;
+		}
+		return Score[points];
 		
 	}
-	private int mostrarMenu() {
+	private static int mostrarMenu() {
 		cLector lector = new cLector();
-		int op;
+		int menu;
 		
 		System.out.println("► OPCIONS DEL PROGRAMA ◄");
 		System.out.println("====================");
@@ -82,109 +86,34 @@ public class Simon_diu {
 		System.out.println("• 0. Sortir •");
 		System.out.println("");
 		
-		op = lector.llegirEnter("Quina opcio vols realitzar: ");
-		while ((op < 0) || (op > 4)) {
-			op = lector.llegirEnter("Quina opcio³ vols realitzar: ");
+		menu = lector.llegirEnter("Quina opcio vols realitzar: ");
+		while ((menu < 0) || (menu > 4)) {
+			menu = lector.llegirEnter("Quina opcio³ vols realitzar: ");
 		}
 		
-		return op;
+		return menu;
 	}
-	private static int game() {
+	private static void score() {
 		cLector lector = new cLector();
-		int op;
+		int menu;
 		
-		op = mostrarMenu();
+		menu = mostrarMenu();
 		
-		if (op == 1) {
+		if (menu == 1) {
 			System.out.println("Has escollit mostrar TOP 5");
-			basic(tableA);
-			System.out.println("Els numeros apareixeran durant 5 segons");
-			taula(tableA);
-			wait.wait(5);
-			cleanScreen();
-
-			numero = 1;
-
-			numPantalla(tableB);
-			points = 0;
-	}	
-	private void loadJson()  {
-		// TODO Auto-generated method stub
-		try {
-			File fitxer = new File(ARXIU);
 			
-			// Preguntem si el fitxer existeix en el disc
-			// la primera vegada no existirÃ 
-			if (fitxer.exists()) {
-				FileReader fr = new FileReader(ARXIU);
-				BufferedReader br = new BufferedReader(fr);
-				
-				String s = "";
-				String jsonString = "";
-				
-				// Llegim totes les lÃ­nies del fitxer
-				while((s = br.readLine()) != null) {
-					jsonString = jsonString + s;
-				}
-				
-				fr.close();
-				
-				json = new JSONObject(jsonString);  // serialitzem
-			} 
-			else {
-				// Si l'arxiu no existeix construÃ¯m 
-				// el json per primera vegada
-				json = new JSONObject();  // es crea sense serialitzar
-				json.put(NEXT_PK, 1);
-				
-				JSONArray ja = new JSONArray();
-				json.put(TASQUES_PENDENTS, ja);
-				json.put(TASQUES_REALITZADES, ja);
-				
-				saveJson();
-			}
-			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	}
+		else if(menu == 2) {
+			System.out.println("Anem a jugar una partida.");
 		}
 	}
-	private void saveJson() {
-		// Guardem el json serialitzat
-		try {
-			
-			FileWriter file = new FileWriter(ARXIU);
-			file.write(json.toString());
-			file.flush();
-			file.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void game() {
 		
-		
-	}
-	private void mostrarScore() {
-		int point = 0;
-		int tableA[] = new int[size2];
-		
-	}
 		cLector lector = new cLector();
 		cWait wait = new cWait();
 
 		int choice;
-		int next;
-		int math;
-		int index;
 		int numero = 1;
-		int number = 0;
 		int j;
 		int points = 0;
 		int point = 0;
@@ -192,7 +121,7 @@ public class Simon_diu {
 
 		int tableA[] = new int[size];
 		int tableB[] = new int[size];
-
+		
 		System.out.println("Ara jugarem al joc de 'Simon dice'. Escolleix el mode de dificultat en que vols jugar");
 		point = 0;
 
@@ -239,7 +168,7 @@ public class Simon_diu {
 				}
 				wait.wait(3);
 				cleanScreen();
-			} 
+			}
 			else if (choice == 2) {
 				System.out.print("Has escollit jugar al Nivell intermig");
 				basic(tableA);
@@ -274,7 +203,7 @@ public class Simon_diu {
 				}
 				wait.wait(3);
 				cleanScreen();
-			} 
+			}
 			else if (choice == 3) {
 				System.out.print("Has escollit jugar al Nivell pro");
 				basic(tableA);
@@ -316,8 +245,38 @@ public class Simon_diu {
 			if (go == false) {
 				System.out.println("Final Points: " + point);
 			}
-		}		
+		}	
 	}
+	private void saveJson() {
+		// Guardem el json serialitzat
+		try {
+			
+			FileWriter file = new FileWriter(ARXIU);
+			file.write(json.toString());
+			file.flush();
+			file.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+		cLector lector = new cLector();
+		cWait wait = new cWait();
+
+		int choice;
+		int next;
+		int math;
+		int index;
+		int numero = 1;
+		int number = 0;
+		int j;
+		static int points = 0;
+		int point = 0;
+		boolean go = true;
+
 	public static int nivel() {
 		cLector lector = new cLector();
 
